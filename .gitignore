@@ -1,1 +1,4 @@
 jellyfin/
+Dockerfile
+docker-compose.yml
+conf/**/*.conf
