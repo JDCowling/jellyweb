@@ -2,19 +2,21 @@
 
 DOMAIN=$1
 
-if test -f conf/nginx/nginx.conf; then
-	rm conf/nginx/nginx.conf
+if [ -d "conf/nginx" ]; then
+	if test -f conf/nginx/nginx.conf; then
+		rm conf/nginx/nginx.conf
+	fi
 fi
-source scripts/inc-nginx-conf.sh >> conf/nginx/nginx.conf
+. scripts/inc-nginx-conf.sh >> conf/nginx/nginx.conf
 
 if test -f Dockerfile; then
 	rm Dockerfile
 fi
-source scripts/inc-dockerfile.sh >> Dockerfile
+. scripts/inc-dockerfile.sh >> Dockerfile
 
 if test -f docker-compose.yml; then
 	rm docker-compose.yml
 fi
-source scripts/inc-docker-compose.sh >> docker-compose.yml
+. scripts/inc-docker-compose.sh >> docker-compose.yml
 
 docker compose up --build -d
