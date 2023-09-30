@@ -20,8 +20,8 @@ services:
     dockerfile: Dockerfile
    container_name: jellyweb-http
    ports:
-    - 80:14952
-    - 443:14953
+    - 14952:80
+    - 14953:443
    networks:
     - jellyweb-net
    restart: 'unless-stopped'
