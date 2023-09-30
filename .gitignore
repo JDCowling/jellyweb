@@ -2,5 +2,4 @@ jellyfin/
 Dockerfile
 docker-compose.yml
 conf/**/*.conf
-Movies/
-TV/
+media/
