@@ -6,6 +6,8 @@ if [ -d "conf/nginx" ]; then
 	if test -f conf/nginx/nginx.conf; then
 		rm conf/nginx/nginx.conf
 	fi
+else
+	mkdir -p conf/nginx
 fi
 . scripts/inc-nginx-conf.sh >> conf/nginx/nginx.conf
 
