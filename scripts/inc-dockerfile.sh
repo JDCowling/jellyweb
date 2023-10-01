@@ -1,9 +1,7 @@
 #!/bin/bash
-
 echo 'FROM nginx:alpine
 
-RUN apk update
-RUN apk add openssl
+RUN apk add --update openssl python3 python3-dev py3-pip build-base libressl-dev musl-dev libffi-dev rust cargo
 
 ENV HOSTNAME='$DOMAIN'
 
@@ -14,10 +12,13 @@ RUN mkdir -p /etc/nginx/ssl
 RUN openssl genrsa -out /etc/nginx/ssl/server.key 2048 && \
     openssl req -new -key /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.csr -subj "/C=UK/ST=West Midlands/L=Wolverhampton/O=Jack Cowling/CN='$DOMAIN'" && \
     openssl x509 -req -days 365 -in /etc/nginx/ssl/server.csr -signkey /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
+    
+RUN pip3 install pip --upgrade
+RUN pip3 install certbot-nginx
+
+RUN mkdir /etc/letsencrypt
 
 EXPOSE 80
 EXPOSE 443
-EXPOSE 14952
-EXPOSE 14953
 
 CMD ["nginx", "-g", "daemon off;"]'
