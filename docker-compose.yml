@@ -7,9 +7,9 @@ services:
    volumes:
     - ./jellyfin/config:/config
     - ./jellyfin/cache:/cache
-    - ./media:/media
+    - ./data:/media/data
    networks: 
-    - jellyweb-net
+    - jwebNet
    restart: unless-stopped
 
   jellyweb-http:
@@ -21,11 +21,13 @@ services:
     - 80:80
     - 443:443
    networks:
-    - jellyweb-net
+    - jwebNet
    restart: unless-stopped
+   hostname: media.jackcowling.local
 
 networks:
-  jellyweb-net:
-    name: jellyweb-net
-    external: false
+  jwebNet:
+    name: jwebNet
+    external: 
+      false
 

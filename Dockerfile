@@ -9,7 +9,7 @@ COPY conf/nginx/nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /etc/nginx/ssl
 
 RUN openssl genrsa -out /etc/nginx/ssl/server.key 2048 && \
-    openssl req -new -key /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.csr -subj "/C=UK/ST=West Midlands/L=Wolverhampton/O=Jack Cowling/CN=media.jackcowling.local" && \
+    openssl req -new -key /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.csr -subj "/C=UK/ST=West Midlands/L=Wolverhampton/O=Jack Cowling/CN=*.local" && \
     openssl x509 -req -days 365 -in /etc/nginx/ssl/server.csr -signkey /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
     
 RUN pip3 install pip --upgrade
